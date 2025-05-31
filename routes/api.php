@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Patient\PatientAnalysisController;
+use App\Http\Controllers\API\Patient\PatientConsumptionLogController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,7 @@ Route::prefix('v1')->group(function () {
 
         Route::prefix('patient')->name('patient.')->group(function () {
             Route::apiResource('analyses', PatientAnalysisController::class)->only(['index', 'store', 'show']);
+            Route::apiResource('consumption-logs', PatientConsumptionLogController::class)->only(['index']);
         });
     });
 });
