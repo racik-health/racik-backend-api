@@ -1,0 +1,91 @@
+##############################################
+# Laravel & Composer
+##############################################
+/vendor
+composer.phar
+
+##############################################
+# Node Modules & Package Manager Directories
+##############################################
+/node_modules
+
+##############################################
+# Public assets & build files
+##############################################
+/public/build
+/public/hot
+/public/storage
+/public/mix-manifest.json
+
+##############################################
+# Laravel storage & cache files
+##############################################
+/storage/*.key
+/storage/app/public
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs
+
+##############################################
+# Laravel bootstrap cache 
+##############################################
+/bootstrap/cache/*
+!bootstrap/cache/.gitignore
+
+##############################################
+# Environment & konfigurasi lokal
+##############################################
+.env*
+!.env.example
+
+##############################################
+# PHPUnit & testing
+##############################################
+/.phpunit.cache
+/phpunit.result.cache
+
+##############################################
+# Output PHPUnit / phpunittest (coverage & test reports)
+##############################################
+/coverage
+/test-results
+
+##############################################
+# File konfigurasi Homestead & autentikasi
+##############################################
+Homestead.json
+Homestead.yaml
+/auth.json
+
+##############################################
+# File IDE, editor, & tooling
+##############################################
+/.idea
+/.vscode
+/.phpactor.json
+/.fleet
+/.nova
+/.zed
+
+##############################################
+# Log & error files
+##############################################
+npm-debug.log*
+yarn-error.log*
+error.log
+
+##############################################
+# Sistem operasi & file temporary
+##############################################
+.DS_Store
+Thumbs.db
+
+##############################################
+# Package Manager Lock Files (Opsional)
+##############################################
+package-lock.json
+pnpm-lock.yaml
+bun.lockb
+bun.lock
+composer.lock

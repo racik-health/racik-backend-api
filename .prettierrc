@@ -1,0 +1,27 @@
+{
+	"trailingComma": "es5",
+	"tabWidth": 4,
+	"printWidth": 120,
+	"htmlWhitespaceSensitivity": "css",
+	"insertPragma": false,
+	"proseWrap": "preserve",
+	"requirePragma": false,
+	"useTabs": true,
+	"singleQuote": false,
+	"vueIndentScriptAndStyle": false,
+	"embeddedLanguageFormatting": "auto",
+	"arrowParens": "avoid",
+	"plugins": ["prettier-plugin-php"],
+	"overrides": [
+		{
+			"files": ["*.php", "*.phtml"],
+			"options": {
+				"parser": "php",
+				"phpVersion": "8.2",
+				"tabWidth": 4,
+				"printWidth": 120,
+				"singleQuote": true
+			}
+		}
+	]
+}
