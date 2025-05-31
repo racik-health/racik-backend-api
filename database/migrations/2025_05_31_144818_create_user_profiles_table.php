@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->date('date_of_birth')->nullable();
             $table->text('allergies')->nullable();
-            $table->text('medical_conditions');
+            $table->text('medical_conditions')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
