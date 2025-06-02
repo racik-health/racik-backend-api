@@ -17,6 +17,7 @@ class InitialDataSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'email' => 'admin@racik.my.id',
+            'phone' => '081234567890',
             'password' => bcrypt(env('ADMIN_PASSWORD', 'password')),
             'role' => 'admin'
         ]);
