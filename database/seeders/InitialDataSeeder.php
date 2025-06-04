@@ -19,7 +19,8 @@ class InitialDataSeeder extends Seeder
             'email' => 'admin@racik.my.id',
             'phone' => '081234567890',
             'password' => bcrypt(env('ADMIN_PASSWORD', 'password')),
-            'role' => 'admin'
+            'role' => 'admin',
+            'email_verified_at' => now(),
         ]);
     }
 }

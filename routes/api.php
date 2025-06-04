@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\Auth\SocialiteController;
 use App\Http\Controllers\API\Patient\PatientAnalysisController;
 use App\Http\Controllers\API\Patient\PatientConsumptionLogController;
 use App\Http\Controllers\API\Patient\PatientDashboardController;
@@ -11,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::post('register', [AuthController::class, 'register'])->name('api.register');
     Route::post('login', [AuthController::class, 'login'])->name('api.login');
+
+    Route::get('auth/google/redirect', [SocialiteController::class, 'redirectToGoogle'])->name('api.auth.google.redirect');
+    Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCallback'])->name('api.auth.google.callback');
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('api.logout');

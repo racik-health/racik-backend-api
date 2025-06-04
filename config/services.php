@@ -37,6 +37,12 @@ return [
 
     'gemini' => [
         'api_key' => env('GEMINI_API_KEY', null),
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID', null),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET', null),
+        'redirect' => env('GOOGLE_REDIRECT_URL', null),
     ]
 
 ];
