@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::post('register', [AuthController::class, 'register'])->name('api.register');
     Route::post('login', [AuthController::class, 'login'])->name('api.login');
-
     Route::get('auth/google/redirect', [SocialiteController::class, 'redirectToGoogle'])->name('api.auth.google.redirect');
     Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCallback'])->name('api.auth.google.callback');
 
