@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Auth\SocialiteController;
+use App\Http\Controllers\API\ContactController;
 use App\Http\Controllers\API\Patient\PatientAnalysisController;
 use App\Http\Controllers\API\Patient\PatientConsumptionLogController;
 use App\Http\Controllers\API\Patient\PatientDashboardController;
@@ -14,6 +15,7 @@ Route::prefix('v1')->group(function () {
     Route::post('login', [AuthController::class, 'login'])->name('api.login');
     Route::get('auth/google/redirect', [SocialiteController::class, 'redirectToGoogle'])->name('api.auth.google.redirect');
     Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCallback'])->name('api.auth.google.callback');
+    Route::apiResource('contact', ContactController::class)->only(['store']);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('api.logout');
@@ -25,6 +27,9 @@ Route::prefix('v1')->group(function () {
             Route::apiResource('consumption-logs', PatientConsumptionLogController::class)->only('index');
             Route::patch('password', [PatientUserProfileController::class, 'updatePassword'])->name('profile.password');
             Route::apiResource('profile', PatientUserProfileController::class)->only(['show', 'update']);
+        });
+
+        Route::prefix('admin')->name('admin.')->group(function () {
         });
     });
 });
