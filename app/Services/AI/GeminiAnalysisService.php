@@ -11,11 +11,13 @@ class GeminiAnalysisService
 {
     protected string $apiKey;
     protected string $apiUrl;
+    protected array $herbalRecipes;
 
     public function __construct()
     {
         $this->apiKey = config('services.gemini.api_key', env('GEMINI_API_KEY'));
         $this->apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={$this->apiKey}";
+        $this->herbalRecipes = config('herbal_recipes.recipes');
     }
 
     public function getRecommendation(User $user, array $symptomsData)
@@ -76,6 +78,10 @@ class GeminiAnalysisService
         }
 
         $prompt = "Anda adalah seorang ahli herbal tradisional Indonesia yang sangat berpengalaman dan ahli dalam pengobatan herbal.\n";
+        $prompt .= "Anda hanya bisa dan boleh merekomendasikan jamu dengan mengerucut pada jamu-jamu berikut yaitu:\n";
+        // $prompt .= $this->herbalRecipes ? implode("\n", array_keys($this->herbalRecipes)) : "Tidak ada jamu yang tersedia.\n";
+        $prompt .= "Jamu Kunyit Asam, Jamu Beras Kencur, Jamu Temulawak.\n\n";
+        $prompt .= "Anda harus memberikan rekomendasi jamu yang paling sesuai berdasarkan gejala yang dilaporkan oleh pengguna. Anda harus mempertimbangkan gejala utama, deskripsi tambahan, tingkat keparahan, durasi gejala, dan informasi profil pengguna.\n\n";
         $prompt .= "Tugas Anda adalah memberikan rekomendasi jamu yang paling sesuai berdasarkan informasi pengguna berikut (pastikan Anda mempertahankan privasi pengguna):\n";
         $prompt .= "- Gejala Utama: \"{$symptomsString}\"\n";
         $prompt .= "- Deskripsi Tambahan: \"{$symptomsData['other_description']}\"\n";
@@ -83,6 +89,7 @@ class GeminiAnalysisService
         $prompt .= "- Durasi Gejala: {$symptomsData['symptom_duration']}\n";
         $prompt .= "- Informasi Profil Pengguna:{$profileInfo}\n\n";
         $prompt .= "Mohon berikan rekomendasi jamu yang paling sesuai. Sertakan informasi berikut dalam format yang jelas dan terstruktur, gunakan label yang SAMA PERSIS seperti di bawah ini, dan pisahkan setiap bagian dengan BARIS BARU:\n\n";
+        $prompt .= "Usahakan agar semua informasi yang diberikan relevan dengan jamu yang direkomendasikan, dan hindari memberikan rekomendasi jamu yang tidak sesuai dengan gejala atau kondisi pengguna dan pastikan setiap rekomendasi didukung oleh informasi yang cukup dengan harapan semua format dapat dipenuhi dengan baik dan benar.\n\n";
         $prompt .= "NAMA_JAMU: [Nama Jamu yang Direkomendasikan]\n";
         $prompt .= "DESKRIPSI_REKOMENDASI: [Penjelasan singkat mengapa jamu ini cocok, manfaat utamanya untuk gejala yang dilaporkan, dan cara kerja jamu secara umum]\n";
         $prompt .= "ATURAN_PAKAI: [Aturan pakai jamu, misal: 2x sehari setelah makan, pagi dan sore]\n";

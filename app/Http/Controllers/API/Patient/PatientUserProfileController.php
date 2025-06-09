@@ -77,7 +77,7 @@ class PatientUserProfileController extends Controller
         ]);
 
         $validatedUserData = $request->validate([
-            'name' => 'nullable|string|max:255',
+            'name' => 'required|string|max:255',
         ]);
 
         try {

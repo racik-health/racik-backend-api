@@ -16,6 +16,7 @@ class PatientConsumptionLogController extends Controller
     {
         try {
             $user = auth()->user();
+
             $logs = ConsumptionLog::where('user_id', '=', $user->id)
                 ->latest('consumed_at')
                 ->get();
