@@ -11,11 +11,13 @@ class GeminiAnalysisService
 {
     protected string $apiKey;
     protected string $apiUrl;
+    protected array $herbalRecipes;
 
     public function __construct()
     {
         $this->apiKey = config('services.gemini.api_key', env('GEMINI_API_KEY'));
         $this->apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={$this->apiKey}";
+        $this->herbalRecipes = config('herbal_recipes.recipes');
     }
 
     public function getRecommendation(User $user, array $symptomsData)
@@ -76,6 +78,8 @@ class GeminiAnalysisService
         }
 
         $prompt = "Anda adalah seorang ahli herbal tradisional Indonesia yang sangat berpengalaman dan ahli dalam pengobatan herbal.\n";
+        $prompt .= "Anda hanya bisa dan boleh merekomendasikan jamu dengan mengerucut pada jamu-jamu berikut yaitu:\n";
+        $prompt .= $this->herbalRecipes ? implode("\n", array_keys($this->herbalRecipes)) : "Tidak ada jamu yang tersedia.\n";
         $prompt .= "Tugas Anda adalah memberikan rekomendasi jamu yang paling sesuai berdasarkan informasi pengguna berikut (pastikan Anda mempertahankan privasi pengguna):\n";
         $prompt .= "- Gejala Utama: \"{$symptomsString}\"\n";
         $prompt .= "- Deskripsi Tambahan: \"{$symptomsData['other_description']}\"\n";
